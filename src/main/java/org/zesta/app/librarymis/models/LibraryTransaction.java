@@ -1,7 +1,6 @@
 package org.zesta.app.librarymis.models;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.Date;
 
@@ -10,7 +9,7 @@ public class LibraryTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private User borrower;
+//    private User borrower;
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book borrowedBook;
