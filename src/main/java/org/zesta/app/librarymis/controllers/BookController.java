@@ -43,4 +43,10 @@ public class BookController {
         bookRepository.save(existingBook);
         return ResponseEntity.ok(new ApiResponse<Book>("Book updated successfully",200,existingBook));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Book>> deleteBook(@PathVariable("id") int id){
+        bookRepository.deleteById(id);
+        return ResponseEntity.ok(new ApiResponse<Book>("Book deleted successfully",200,null));
+    }
 }
