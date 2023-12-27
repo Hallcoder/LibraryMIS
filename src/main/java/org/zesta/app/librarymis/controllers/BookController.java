@@ -32,6 +32,7 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<Book>> createBook(@RequestBody Book book){
+        System.out.println("Creating book");
         Book newBook = bookService.createBook(book);
         return ResponseEntity.ok(new ApiResponse<Book>("Book created successfully",200,newBook));
     }

@@ -2,10 +2,16 @@ package org.zesta.app.librarymis.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class AuthenticationRequestDAO {
+@NoArgsConstructor
+public class RegistrationRequest {
     private String email;
+    private String firstName;
+    private String lastName;
+    private int age;
     private String password;
+
 }

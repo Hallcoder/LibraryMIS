@@ -1,6 +1,6 @@
 package org.zesta.app.librarymis.Utils.enums;
 
-public enum ERole {
+public enum Role {
     LIBRARIAN,
     LIBRARY_USER
 }

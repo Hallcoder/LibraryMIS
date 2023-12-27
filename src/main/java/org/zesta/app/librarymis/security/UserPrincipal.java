@@ -28,19 +28,23 @@ public class UserPrincipal implements UserDetails {
     public UserPrincipal(Integer id, String email, String password, List<GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;
+//        System.out.println("During construction:" +password);
         this.password = password;
         this.authorities = authorities;
     }
 
     public static UserDetails create(User user) {
+//        System.out.println("User password: " +  user.getPassword());
         List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
-        return new UserPrincipal(
+                .map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
+        var userPrincipal =  new UserPrincipal(
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities
         );
+        System.out.println(userPrincipal);
+        return userPrincipal;
     }
 
     @Override
@@ -50,31 +54,31 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
