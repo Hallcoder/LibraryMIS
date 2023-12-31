@@ -61,9 +61,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequestDAO req){
-//        System.out.println("starting.... Email: " + req.getEmail() + " pass: " + req.getPassword());
+        System.out.println("starting.... Email: " + req.getEmail() + " pass: " + req.getPassword());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-//        System.out.println("done authenticating...");
+        System.out.println("done authenticating...");
         User user = userRepository.findByEmail(req.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(UserPrincipal.create(user));
         return ResponseEntity.ok(new AuthenticationResponse(jwtToken, user));

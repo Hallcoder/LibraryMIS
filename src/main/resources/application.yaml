@@ -12,3 +12,5 @@ logging:
   level:
     org.springframework.security: TRACE
     org.zesta.app.librarymis: TRACE
+server:
+  port: 8081
