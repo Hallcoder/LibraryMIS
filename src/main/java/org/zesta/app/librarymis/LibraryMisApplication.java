@@ -1,5 +1,6 @@
 package org.zesta.app.librarymis;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,5 +10,4 @@ public class LibraryMisApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryMisApplication.class, args);
     }
-
 }

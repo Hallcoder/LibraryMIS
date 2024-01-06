@@ -54,6 +54,7 @@ public class AuthController {
         User user = new User(req.getEmail(),passwordEncoder.encode(req.getPassword()));
         user.setRoles(Collections.singleton(Role.LIBRARIAN));
         newUser.setProfile(user);
+        System.out.println("Profile" + newUser.getProfile().getRoles());
         newUser = libraryUserRepository.save(newUser);
         return ResponseEntity.ok(new AuthenticationResponse(null,newUser));
     }

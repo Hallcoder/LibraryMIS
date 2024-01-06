@@ -34,7 +34,6 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserDetails create(User user) {
-//        System.out.println("User password: " +  user.getPassword());
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
         var userPrincipal =  new UserPrincipal(
@@ -43,13 +42,14 @@ public class UserPrincipal implements UserDetails {
                 user.getPassword(),
                 authorities
         );
+
         System.out.println(userPrincipal);
         return userPrincipal;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
