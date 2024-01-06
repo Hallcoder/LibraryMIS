@@ -20,3 +20,7 @@ logging:
 file:
   upload:
     dir : upload
+cloudinary:
+  api_key: 177818943471628
+  cloud_name: versusbet
+  api_secret: inFBqAhZJdPCnDSzk6af9ixfP70

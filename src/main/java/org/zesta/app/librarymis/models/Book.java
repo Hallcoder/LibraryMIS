@@ -17,7 +17,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JsonIgnore
-    private String filePath;
+    private String downloadUrl;
     private String title;
     private String author;
     private String ISBN;

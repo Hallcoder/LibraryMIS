@@ -9,6 +9,7 @@ import org.zesta.app.librarymis.models.Book;
 import org.zesta.app.librarymis.models.Subject;
 import org.zesta.app.librarymis.repositories.IBookRepository;
 import org.zesta.app.librarymis.services.IBookService;
+import org.zesta.app.librarymis.services.ICloudinaryService;
 import org.zesta.app.librarymis.services.IFileService;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BookService implements IBookService {
     private final IBookRepository bookRepository;
-    private final IFileService fileService;
+    private final ICloudinaryService cloudinaryService;
 
     @Override
     public List<Book> getBooks() {
@@ -28,8 +29,8 @@ public class BookService implements IBookService {
 
     @Override
     public Book createBook(Book book, MultipartFile file) throws IOException {
-            fileService.saveFile(file, "book/" + book.getSubject().getName());
-            book.setFilePath();
+            String path = cloudinaryService.uploadFile(file, "book/" + book.getSubject().getName());
+            book.setDownloadUrl(path);
             return bookRepository.save(book);
 
     }
