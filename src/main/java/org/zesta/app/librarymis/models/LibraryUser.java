@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.zesta.app.librarymis.Utils.Person;
 import org.zesta.app.librarymis.models.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -19,17 +20,15 @@ public class LibraryUser extends Person {
     @GeneratedValue
     private Integer id;
     private int grade;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "librarian_borrowed_books",
-            joinColumns = @JoinColumn(name = "librarian_id"),
+            name = "user_books",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    @JsonIgnore
-    private List<Book> currentBorrowedBooks;
-    @OneToMany(mappedBy = "borrower")
-    @JsonIgnore
-    private List<LibraryTransaction> transactions;
+    private List<Book> currentBorrowedBooks = new ArrayList<Book>();
+    @OneToMany(mappedBy = "borrower",fetch = FetchType.EAGER)
+    private List<LibraryTransaction> transactions = new ArrayList<LibraryTransaction>();
     @OneToOne
     private User profile;
     public LibraryUser(String email, String firstName, String lastName, int age) {

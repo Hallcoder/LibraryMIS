@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.Getter;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,8 @@ public class Book {
     @JsonIgnore
     private Subject subject;
     private int lentAmount;
+    @ManyToMany
+    private List<LibraryUser> users = new ArrayList<>();
     @OneToMany(mappedBy = "borrowedBook")
     @JsonIgnore
     private List<LibraryTransaction> transactions;

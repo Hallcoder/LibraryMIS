@@ -23,8 +23,8 @@ public class LibraryTransaction {
     @JsonIgnore
     private LibraryUser borrower;
     @ManyToOne
-    @JoinColumn(name = "book_id")
     @JsonIgnore
+    @JoinColumn(name = "book_id")
     private Book borrowedBook;
     private LocalDate borrowDate;
     private LocalDate returnDate;
