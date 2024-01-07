@@ -1,5 +1,6 @@
 package org.zesta.app.librarymis.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,16 @@ public class LibraryUser extends Person {
     @GeneratedValue
     private Integer id;
     private int grade;
-
+    @ManyToMany
+    @JoinTable(
+            name = "librarian_borrowed_books",
+            joinColumns = @JoinColumn(name = "librarian_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    @JsonIgnore
+    private List<Book> currentBorrowedBooks;
     @OneToMany(mappedBy = "borrower")
+    @JsonIgnore
     private List<LibraryTransaction> transactions;
     @OneToOne
     private User profile;

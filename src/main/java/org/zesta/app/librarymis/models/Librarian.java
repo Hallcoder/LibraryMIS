@@ -1,15 +1,13 @@
 package org.zesta.app.librarymis.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.zesta.app.librarymis.Utils.Person;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +19,7 @@ public class Librarian extends Person {
     private int id;
     private Date startingWorkDate;
     private int workingHours;
+
     @OneToOne()
     private User profile;
     private double salaryInDollars;
