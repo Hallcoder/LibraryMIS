@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 public class LibraryUser extends Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private int grade;
     @ManyToMany(fetch = FetchType.EAGER)
