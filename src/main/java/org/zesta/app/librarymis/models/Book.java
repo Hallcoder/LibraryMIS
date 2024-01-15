@@ -29,8 +29,6 @@ public class Book {
     @JsonIgnore
     private Subject subject;
     private int lentAmount;
-    @ManyToMany(mappedBy = "currentBorrowedBooks")
-    private List<LibraryUser> users = new ArrayList<>();
     @OneToMany(mappedBy = "borrowedBook")
     @JsonIgnore
     private List<LibraryTransaction> transactions;

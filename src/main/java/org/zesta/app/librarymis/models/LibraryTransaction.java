@@ -22,7 +22,7 @@ public class LibraryTransaction {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private LibraryUser borrower;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinColumn(name = "book_id")
     private Book borrowedBook;

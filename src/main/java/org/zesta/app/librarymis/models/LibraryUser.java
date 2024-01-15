@@ -23,8 +23,8 @@ public class LibraryUser extends Person {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_books",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id")
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<Book> currentBorrowedBooks = new ArrayList<Book>();
     @OneToMany(mappedBy = "borrower",fetch = FetchType.EAGER)

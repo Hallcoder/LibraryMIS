@@ -40,6 +40,7 @@ public class TransactionService implements ITransactionService {
            transaction.setBorrowedBook(book.get());
            transaction.setBorrowDate();
            transaction.setReturnDate();
+           user.get().setCurrentBorrowedBooks(user.get().getCurrentBorrowedBooks().add(book.get()));
            transaction = transactionRepository.save(transaction);
            return transaction;
        }
