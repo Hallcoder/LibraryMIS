@@ -3,6 +3,8 @@ package org.zesta.app.librarymis.controllers;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zesta.app.librarymis.dto.CreateBookDTO;
@@ -20,6 +22,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/v1/book")
 @AllArgsConstructor
+@PreAuthorize("hasAuthority('LIBRARY_USER')")
 public class BookController {
     private final BookService bookService;
     private final IBookRepository bookRepository;
@@ -40,6 +43,7 @@ public class BookController {
         fileService.saveFile(file,"testBooks");
         return ResponseEntity.ok("File saved!");
     }
+//    @Secured("LIBRARUSER")
     @PostMapping
     public ResponseEntity<ApiResponse<Book>> createBook(@ModelAttribute CreateBookDTO book) throws IOException {
         System.out.println("Creating book");

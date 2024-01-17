@@ -2,6 +2,7 @@ package org.zesta.app.librarymis.services.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zesta.app.librarymis.dto.CreateBookDTO;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@PreAuthorize("hasAuthority('LIBRARY_USER')")
 public class BookService implements IBookService {
     private final IBookRepository bookRepository;
     private final ICloudinaryService cloudinaryService;

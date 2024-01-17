@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zesta.app.librarymis.Utils.enums.Role;
 import org.zesta.app.librarymis.config.JwtService;
+import org.zesta.app.librarymis.models.Librarian;
 import org.zesta.app.librarymis.models.LibraryUser;
 import org.zesta.app.librarymis.models.User;
 import org.zesta.app.librarymis.repositories.ILibraryUserRepository;
 import org.zesta.app.librarymis.repositories.IUserRepository;
 import org.zesta.app.librarymis.security.UserPrincipal;
+import org.zesta.app.librarymis.services.ILibrarianService;
+import org.zesta.app.librarymis.services.ILibraryUserService;
 
 import javax.naming.AuthenticationException;
 import java.util.Collections;
@@ -29,6 +32,7 @@ import java.util.Optional;
 public class AuthController {
     private final ModelMapper modelMapper;
     private final ILibraryUserRepository libraryUserRepository;
+    private final ILibrarianService librarianService;
     private final AuthenticationManager authenticationManager;
     private final IUserRepository userRepository;
     private final JwtService jwtService;
@@ -49,13 +53,14 @@ public class AuthController {
 
     @PostMapping("/librarian/register")
     public ResponseEntity<AuthenticationResponse> registerAdmin(@RequestBody RegistrationRequest req){
-        LibraryUser newUser  = new LibraryUser();
+        Librarian newUser  = new Librarian();
         modelMapper.map(req,newUser);
         User user = new User(req.getEmail(),passwordEncoder.encode(req.getPassword()));
         user.setRoles(Collections.singleton(Role.LIBRARIAN));
+        userRepository.save(user);
         newUser.setProfile(user);
         System.out.println("Profile" + newUser.getProfile().getRoles());
-        newUser = libraryUserRepository.save(newUser);
+        newUser = librarianService.create(newUser);
         return ResponseEntity.ok(new AuthenticationResponse(null,newUser));
     }
 

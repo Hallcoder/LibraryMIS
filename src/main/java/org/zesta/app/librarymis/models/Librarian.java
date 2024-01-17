@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.zesta.app.librarymis.Utils.Person;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,13 +19,13 @@ public class Librarian extends Person {
     @Id
     @GeneratedValue
     private int id;
-    private Date startingWorkDate;
-    private int workingHours;
-
     @OneToOne()
     private User profile;
-    private double salaryInDollars;
     public Librarian(String email, String firstName, String lastName, int age) {
         super(email, firstName, lastName, age);
+    }
+
+    public void setFullName(){
+        this.setFullName(this.getFirstName()+this.getLastName());
     }
 }

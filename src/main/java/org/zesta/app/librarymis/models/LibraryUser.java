@@ -20,7 +20,7 @@ public class LibraryUser extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private int grade;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_books",
             joinColumns = @JoinColumn(name = "book_id"),
